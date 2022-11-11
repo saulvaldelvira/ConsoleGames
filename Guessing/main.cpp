@@ -33,7 +33,12 @@ bool isInteger(const std::string &s) {
     return false;
 }
 
-//reads and integer 
+//returns wheter the int is in the range
+bool isInRange(int n){
+    return n>=0 && n<=difficulty;
+}
+
+//reads an integer from console. And checks if it is valid (it's an int, and it's in the rang of the game)
 int readInteger(){
     string n;
     bool valid_input = false;
@@ -41,7 +46,7 @@ int readInteger(){
 	do {
 		cout<<"Choose a number between [0 - " << difficulty << "]: ";
 		cin>>n;
-        valid_input = cin.good() && isInteger(n);
+        valid_input = cin.good() && isInteger(n) && isInRange(std::stoi(n));
 		if (!(valid_input)) {
 			cout << "That input is invalid!\n";
 			clearCin();
