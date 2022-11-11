@@ -144,7 +144,6 @@ void loop(){
 
 void goodbye(){
     cout<<"\n***Final stats***\nWins:   "<<wins<<endl<<"Losses: "<<losses<<endl<<"\nGoodbye!"<<endl;
-    //cout<<"Press any key to exit...";
 #ifdef _WIN32
     system("pause");
 #elif __linux__
