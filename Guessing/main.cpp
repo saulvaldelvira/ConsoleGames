@@ -98,7 +98,7 @@ void setup(){
           "* Welcome, this is a simple guessing game.                                       * " <<endl<<
           "* You have to input a number through the console, and if you miss, the game will *" <<endl<<
           "* give you a hint (higher or lower)                                              *" <<endl<<
-          "* That way, your objetive is to guess the number before you run out of chances.  *" <<endl<<
+          "* That way, your objective is to guess the number before you run out of chances. *" <<endl<<
           "**********************************************************************************" <<endl;
     setDifficulty();
 
