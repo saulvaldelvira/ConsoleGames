@@ -14,15 +14,26 @@ static int CHANCES;
 
 int wins, losses;
 
+//Clears the cin buffer and ignores everything left
 void clearCin(){
     cin.clear();
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-bool isNumber(const std::string &s) {
-  return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
+//returns true if the given int has only numeric characters
+bool isInteger(const std::string &s) {
+    if(!s.empty() && std::all_of(s.begin(), s.end(), ::isdigit)){
+        try{
+            std::stoi(s);
+        }catch(std::out_of_range){
+            return false;
+        }
+        return true;
+    }
+    return false;
 }
 
+//reads and integer 
 int readInteger(){
     string n;
     bool valid_input = false;
@@ -30,7 +41,7 @@ int readInteger(){
 	do {
 		cout<<"Choose a number between [0 - " << difficulty << "]: ";
 		cin>>n;
-        valid_input = cin.good() && isNumber(n);
+        valid_input = cin.good() && isInteger(n);
 		if (!(valid_input)) {
 			cout << "That input is invalid!\n";
 			clearCin();
