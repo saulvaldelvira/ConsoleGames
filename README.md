@@ -1,2 +1,2 @@
 # Games
-A suite of easy games on C++
+A suite of easy console games.
