@@ -1,13 +1,19 @@
+//I/O
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <limits>
-#include <string>
-#include <algorithm>
 using std::cout;
 using std::endl;
 using std::cin;
+
+#include <stdlib.h> //rand function
+#include <time.h> //time function (used to set the rand seed)
+#include <limits> //used to clear the cin
+
+//string
+#include <string>
 using std::string;
+
+#include <algorithm> //used in isInteger to check if all of the string are numeric values
+
 enum DIFFICULTY {EASY = 25, MEDIUM = 50, HARD = 150, IMPOSIBLE = 99999} difficulty;
 const int INVALID_DIFFICULTY = -1;
 static int CHANCES;
