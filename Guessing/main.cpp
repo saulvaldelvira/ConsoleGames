@@ -143,11 +143,18 @@ void loop(){
 }
 
 void goodbye(){
-    cout<<"\n***Final stats***\nWins:   "<<wins<<endl<<"Losses: "<<losses<<endl<<"\nGoodbye!";
+    cout<<"\n***Final stats***\nWins:   "<<wins<<endl<<"Losses: "<<losses<<endl<<"\nGoodbye!"<<endl;
+    //cout<<"Press any key to exit...";
+#ifdef _WIN32
+    system("pause");
+#elif __linux__
+    system("read");
+#endif
 }
 
 int main(){
     setup();
     loop();
     goodbye();
+    return 0;
 }
