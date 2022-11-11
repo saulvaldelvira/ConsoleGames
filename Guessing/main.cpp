@@ -95,9 +95,9 @@ void setup(){
     wins = 0;
     losses = 0;
     cout<<"**********************************************************************************" <<endl<<
-          "* Welcome, this is a simple guessing game.                                       * " <<endl<<
-          "* You have to input a number through the console, and if you miss, the game will *" <<endl<<
-          "* give you a hint (higher or lower)                                              *" <<endl<<
+          "* Welcome, this is a simple game in which you'll have to try to guess a number.  * " <<endl<<
+          "* To play, you enter a number through the console, and if you miss, you will be  *" <<endl<<
+          "* given a hint (higher or lower)                                                 *" <<endl<<
           "* That way, your objective is to guess the number before you run out of chances. *" <<endl<<
           "**********************************************************************************" <<endl;
     setDifficulty();
