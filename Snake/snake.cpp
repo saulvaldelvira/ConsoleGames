@@ -8,6 +8,11 @@ using namespace std::chrono_literals;
 int nScreenWidth = 120;			// Console Screen Size X (columns)
 int nScreenHeight = 30;	        // Console Screen Size Y (rows)
 
+const int UP = 0;
+const int RIGHT = 1;
+const int DOWN = 2;
+const int LEFT = 3;
+
 struct sSnakeSegment{
     int x, y;
 };
@@ -29,8 +34,12 @@ int main(){
 
     bool bKeyLeft = false,
          bKeyRight = false,
+         bKeyUp = false, 
+         bKeyDown = false,
          bKeyLeftOld = false,
-         bKeyRightOld = false;
+         bKeyRightOld = false,
+         bKeyUpOld = false,
+         bKeyDownOld = false;
 
     srand(time(NULL));
 
@@ -40,40 +49,52 @@ int main(){
             //Get Input
         auto t1 = system_clock::now();
         while((system_clock::now() - t1) < (nSnakeDirection % 2 == 1 ? 120ms : 200ms)){
-            bKeyRight = (0x8000 & GetAsyncKeyState((unsigned char)('\x27'))) != 0;
-            bKeyLeft = (0x8000 & GetAsyncKeyState((unsigned char)('\x25'))) != 0;
+            bKeyRight = (0x8000 & GetAsyncKeyState((unsigned char)(VK_RIGHT))) != 0;
+            bKeyLeft = (0x8000 & GetAsyncKeyState((unsigned char)(VK_LEFT))) != 0;
+            bKeyUp = (0x8000 & GetAsyncKeyState((unsigned char)(VK_UP))) != 0;
+            bKeyDown = (0x8000 & GetAsyncKeyState((unsigned char)(VK_DOWN))) != 0;
 
+            //optimizar quitar if
             if(bKeyRight && !bKeyRightOld){
-                nSnakeDirection++;
-                if(nSnakeDirection == 4)
-                    nSnakeDirection = 0;
+                if(nSnakeDirection!=LEFT)
+                    nSnakeDirection = RIGHT;
             }
 
             if(bKeyLeft && !bKeyLeftOld){
-                nSnakeDirection--;
-                if(nSnakeDirection == -1)
-                    nSnakeDirection = 3;
+                if(nSnakeDirection!=RIGHT)
+                    nSnakeDirection = LEFT;
+            }
+
+            if(bKeyUp && !bKeyUpOld){
+                if(nSnakeDirection != DOWN)
+                    nSnakeDirection = UP;
+            }
+
+            if(bKeyDown && !bKeyDownOld){
+                if(nSnakeDirection != UP)
+                    nSnakeDirection = DOWN;
             }
 
             bKeyLeftOld = bKeyLeft;
             bKeyRightOld = bKeyRight;
+            bKeyUpOld = bKeyUp;
+            bKeyDownOld = bKeyDown;
         }
         
+    // Game Logic
 
-        // Game Logic
-
-            //Update Snake Position
+        //Update Snake Position
         switch(nSnakeDirection){
-        case 0: //UP
+        case UP:
             snake.push_front({snake.front().x, snake.front().y - 1});
             break;
-        case 1: //RIGHT
+        case RIGHT:
             snake.push_front({snake.front().x + 1, snake.front().y});
             break;
-        case 2: //DOWN
+        case DOWN:
             snake.push_front({snake.front().x, snake.front().y + 1});
             break;
-        case 3: //LEFT
+        case LEFT:
             snake.push_front({snake.front().x - 1, snake.front().y});
             break;
         }
