@@ -45,12 +45,12 @@ bool isInRange(int n){
 }
 
 //reads an integer from console. And checks if it is valid (it's an int, and it's in the rang of the game)
-int readInteger(){
+int readInteger(int min, int max){
     string n;
     bool valid_input = false;
 
 	do {
-		cout<<"Choose a number between [0 - " << difficulty << "]: ";
+		cout<<"Choose a number between [" << min <<" - " <<max << "]: ";
 		cin>>n;
         valid_input = cin.good() && isInteger(n) && isInRange(std::stoi(n));
 		if (!(valid_input)) {
@@ -73,19 +73,19 @@ void setDifficulty(){
         {
         case '1':
             difficulty = EASY;
-            CHANCES = 3;
+            CHANCES = 4;
             break;
         case '2':
             difficulty = MEDIUM;
-            CHANCES = 6;
+            CHANCES = 5;
             break;
         case '3':
             difficulty = HARD;
-            CHANCES = 8;
+            CHANCES = 5;
             break;
         case '4':
             difficulty = IMPOSIBLE;
-            CHANCES = 20;
+            CHANCES = 1;
             break;
         default:
             cout<<"Invalid choice\nChoose a difficulty\n1)Easy 2)Medium 3)Hard 4)Imposible: ";
@@ -112,19 +112,24 @@ void setup(){
 }
 
 bool guess(){
-    int number, guess, chances = CHANCES;
+    int number, guess, chances = CHANCES, minInter = 0, maxInter = difficulty;
     number = rand() % difficulty + 1;
-    cout<<"You have " << chances << " chances"<<endl;
+    cout<<"You have " << chances;
+    if(chances==1)
+        cout<<" chance "<<endl;
+    else
+        cout<<" chances "<<endl;
     while(chances > 0){
-        guess = readInteger();
+        guess = readInteger(minInter, maxInter);
         chances--;
         cout<< endl;
-        if(guess>number)
+        if(guess>number){
             cout<<"Lower"<<endl;
-        else if(guess<number)
+            maxInter = guess;
+        }else if(guess<number){
             cout<<"Higher"<<endl;
-        else
-            return true;
+            minInter = guess;
+        }else return true;
         cout<<chances<<" chances left"<<endl<<endl;;
     }
     return false;
