@@ -1,2 +1,2 @@
 # Console Games
-A suite of easy console games.
+A suite of classic console games.
