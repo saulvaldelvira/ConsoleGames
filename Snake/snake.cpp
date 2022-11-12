@@ -159,8 +159,5 @@ int main(){
         WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
     }
         while((0x8000 & GetAsyncKeyState((unsigned char)('\x20'))) == 0);
-    }
-    
-	//screen[nScreenWidth * nScreenHeight - 1] = '\0';
-	
+    }	
 }
