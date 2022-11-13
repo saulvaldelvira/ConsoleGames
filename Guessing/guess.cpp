@@ -14,8 +14,8 @@ using std::string;
 
 #include <algorithm> //used in isInteger to check if all of the string are numeric values
 
-enum DIFFICULTY {EASY = 25, MEDIUM = 50, HARD = 150, IMPOSIBLE = 99999} difficulty;
-const int INVALID_DIFFICULTY = -1;
+enum DIFFICULTY {EASY = 30, MEDIUM = 150, HARD = 300, IMPOSIBLE = 99999} difficulty;
+
 static int CHANCES;
 
 int wins, losses;
@@ -31,7 +31,7 @@ bool isInteger(const std::string &s) {
     if(!s.empty() && std::all_of(s.begin(), s.end(), ::isdigit)){
         try{
             std::stoi(s);
-        }catch(std::out_of_range){
+        }catch(std::out_of_range&){
             return false;
         }
         return true;
@@ -40,8 +40,8 @@ bool isInteger(const std::string &s) {
 }
 
 //returns wheter the int is in the range
-bool isInRange(int n){
-    return n>=0 && n<=difficulty;
+bool isInRange(int n, int min, int max){
+    return n>=min && n<=max;
 }
 
 //reads an integer from console. And checks if it is valid (it's an int, and it's in the rang of the game)
@@ -52,7 +52,7 @@ int readInteger(int min, int max){
 	do {
 		cout<<"Choose a number between [" << min <<" - " <<max << "]: ";
 		cin>>n;
-        valid_input = cin.good() && isInteger(n) && isInRange(std::stoi(n));
+        valid_input = cin.good() && isInteger(n) && isInRange(std::stoi(n), min, max);
 		if (!(valid_input)) {
 			cout << "That input is invalid!\n";
 			clearCin();
@@ -85,7 +85,7 @@ void setDifficulty(){
             break;
         case '4':
             difficulty = IMPOSIBLE;
-            CHANCES = 1;
+            CHANCES = 3;
             break;
         default:
             cout<<"Invalid choice\nChoose a difficulty\n1)Easy 2)Medium 3)Hard 4)Imposible: ";
@@ -113,7 +113,7 @@ void setup(){
 
 bool guess(){
     int number, guess, chances = CHANCES, minInter = 0, maxInter = difficulty;
-    number = rand() % difficulty + 1;
+    number = rand() % (difficulty + 1);
     cout<<"You have " << chances;
     if(chances==1)
         cout<<" chance "<<endl;
@@ -130,7 +130,11 @@ bool guess(){
             cout<<"Higher"<<endl;
             minInter = guess;
         }else return true;
-        cout<<chances<<" chances left"<<endl<<endl;;
+        cout<<chances;
+        if(chances==1)
+            cout<<" chance left"<<endl;
+        else
+            cout<<" chances left"<<endl;
     }
     return false;
 }
