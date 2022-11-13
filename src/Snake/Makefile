@@ -1,10 +1,10 @@
 CXX = g++.exe
-CXXFLAGS = -Wall -fmessage-length=0 -fno-tree-vectorize
+CXXFLAGS = -Wall -fmessage-length=0 -fno-tree-vectorize -DUNICODE
 LIBS = 
-DBGDIR = ../bin/debug
-RELDIR = ../bin/release
+DBGDIR = ../../bin/debug
+RELDIR = ../../bin/release
 OBJS = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
-NAME = guess
+NAME = snake
 
 .PHONY: default all debug release clean
 
