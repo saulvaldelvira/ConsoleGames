@@ -9,7 +9,6 @@ do
     echo "4)Clean"
 
     read -p "Option: " option
-    echo "$option"
     
 
     if [ "$option" = "1" ];
@@ -23,17 +22,22 @@ do
         action="all"
     elif [ $option = "4" ];
     then
-        action="clean"
+        cd src
+        make clean
+        cd ..
+        exit 0
     else
         echo "Invalid Option"
     fi
 done
 
-for dir in ./src/*/
+cd src
+
+for dir in $(ls -d */)
 do
     echo working on $dir
-    cd $dir
-    make $action
-    cd ../..
+    make SET=$dir $action
     echo
 done
+
+cd ..
