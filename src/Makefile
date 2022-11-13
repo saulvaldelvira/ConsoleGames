@@ -46,6 +46,3 @@ $(DBGDIR)/ $(RELDIR)/:
 clean:
 	rm -f $(DBGDIR)/*.o *~ core
 	rm -f $(RELDIR)/*.o *~ core
-
-
-
