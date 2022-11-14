@@ -22,10 +22,7 @@ do
         action="all"
     elif [ $option = "4" ];
     then
-        cd src
-        make clean
-        cd ..
-        exit 0
+        action="clean"
     else
         echo "Invalid Option"
     fi
